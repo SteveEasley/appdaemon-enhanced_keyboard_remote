@@ -72,7 +72,7 @@ Key | Optional | Type | Default | Description
 `config[].device_name` | True | array | [] | An optional list of device names this config must match, allowing support for multiple keyboard/remotes. The values would be the same values used in your `Keyboard Remote` configuration in `configuration.yaml`.<br><br>If omited (and `config[].device_descriptor` is omitted), the first config in `config[]` will always be chosen.
 `config[].device_descriptor` | True | array | [] | An optional list of device descriptors this config must match. Follows the same rules as `config[].device_name`.
 `config[].keys` | False | map | {} | A map of key codes to configuration.
-`config[].keys.name` | False | string | | The logical name of the key. This will show up as `key_name` in the event. For long presses, the `key_name` will show up with the suffix `-long` (e.g. play-long).
+`config[].keys.name` | False | string | | The logical name of the key. This will show up as `key_name` in the event.
 `config[].keys.repeat` | True | bool | false | An optional flag indicating key hold repeats should be sent. This means a new event will be generated repeatedly as long as the key is held. Useful for functions such as brightness level or volume.
 
 Simple example:
