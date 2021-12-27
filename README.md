@@ -1,4 +1,4 @@
-# Enhanced Keyboard Remote for AppDaemon
+# Enhanced Keyboard Remote
 
 An AppDaemon app that **enhances** the functionality of the Home Assistant [Keyboard Remote](https://www.home-assistant.io/integrations/keyboard_remote) integration by adding the following features:
 
@@ -19,11 +19,16 @@ After installing all prerequisites, and confirming they work, you can install th
 
 ### HACS Installation
 
-The preferred method for installing is with [HACS](https://hacs.xyz/).
+The preferred method for installing is with [HACS: Home Assistant Community Store](https://hacs.xyz/). To add with HACS you just need to add this app's github repository to your list of custom HACS repositories.
+
+1. Install HACS into Home Assistant if you haven't already done so.
+1. Ensure HACS has AppDaemon apps support enabled (its disabled by default). See https://hacs.xyz/docs/categories/appdaemon_apps.
+1. Add this app's repository to your HACS Custom Repository list. See https://hacs.xyz/docs/faq/custom_repositories. For the custom repository URL use https://github.com/SteveEasley/appdaemon-enhanced_keyboard_remote, and for Category use AppDaemon.
+1. The installation will put the app in your Home Assistant `config/appdaemon/apps` directory.
 
 ### Manual Installation
 
-Alternatively, you can download the contents of the `enhanced_keyboard_remote` directory from the apps directory to your local AppDaemon apps directory.
+Alternatively, you can download the contents of the [enhanced_keyboard_remote](https://github.com/SteveEasley/appdaemon-enhanced_keyboard_remote/tree/main/apps/enhanced_keyboard_remote) directory from the apps directory to your local Home Assistant `config/appdaemon/apps`.
 
 ## Usage
 
@@ -62,6 +67,7 @@ Key | Optional | Type | Default | Description
 -- | -- | -- | -- | --
 `module` | False | string | | The module name of the app (must be `enhanced_keyboard_remote`).
 `class` | False | string | | The name of the Class (must be `EnhancedKeyboardRemote`).
+`description` | False | string | | A description for the app.
 `config` | False | array | [] | A list of one or more device configurations. Each configuration should represent one keyboard/remote. If you only have a single device, for simplicity you can omit the `device_name` / `device_descriptor` keys below.
 `config[].device_name` | True | array | [] | An optional list of device names this config must match, allowing support for multiple keyboard/remotes. The values would be the same values used in your `Keyboard Remote` configuration in `configuration.yaml`.<br><br>If omited (and `config[].device_descriptor` is omitted), the first config in `config[]` will always be chosen.
 `config[].device_descriptor` | True | array | [] | An optional list of device descriptors this config must match. Follows the same rules as `config[].device_name`.
@@ -74,6 +80,7 @@ Simple example:
 enhanced_keyboard_remote:
   module: enhanced_keyboard_remote
   class: EnhancedKeyboardRemote
+  description: Enhanced Keyboard Remote
   config:
     - keys:
         116:

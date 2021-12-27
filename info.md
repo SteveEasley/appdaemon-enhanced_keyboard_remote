@@ -1,4 +1,4 @@
-# Enhanced Keyboard Remote for AppDaemon
+# Enhanced Keyboard Remote
 
 An AppDaemon app that **enhances** the functionality of the Home Assistant [Keyboard Remote](https://www.home-assistant.io/integrations/keyboard_remote) integration by adding the following features:
 
@@ -15,4 +15,4 @@ A great use case for this app is utilizating a USB RF remote control as a univer
 
 ## Installation
 
-For installation refer to the [README](https://github.com/SteveEasley/appdaemon-enhanced_keyboard_remote).
+For installation refer to the [documentation](https://github.com/SteveEasley/appdaemon-enhanced_keyboard_remote).
