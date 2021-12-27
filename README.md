@@ -109,6 +109,8 @@ keyboard_remote:
     emulate_key_hold_repeat: 0.2
 ```
 
+> Note: Its import to use `key_up` and not `key_down`, otherwise there would be no way to provide a distinct short and long press.
+
 > Note: I recommend not using the type `key_hold` even if your USB device sends them. Using the emulated hold gives you control over the hold timings, which you dont get if you use the native type. In the example config above I am saying I dont want a key press to be a long press till its held for 0.5 seconds, then repeat 5 times a seconds.
 
 ## Automation Example
