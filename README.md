@@ -93,7 +93,27 @@ enhanced_keyboard_remote:
           repeat: true
 ```
 
-A simple automation using the above example for a short and long version of volume up might looks like this:
+### Keyboard Remote integration setup
+
+Its important you have the `Keyboard Remote` configuration in Home Assistant setup correctly for this app to work properly. Namely, for long key presses to be detected `key_hold` events must be enabled.
+
+Example `/config/configuration.yaml` config:
+
+```yaml
+keyboard_remote:
+  - device_name: USB Composite Device Keyboard
+    type:
+      - key_up
+    emulate_key_hold: true
+    emulate_key_hold_delay: 0.5
+    emulate_key_hold_repeat: 0.2
+```
+
+> Note: I recommend not using the type `key_hold` even if your USB device sends them. Using the emulated hold gives you control over the hold timings, which you dont get if you use the native type. In the example config above I am saying I dont want a key press to be a long press till its held for 0.5 seconds, then repeat 5 times a seconds.
+
+## Automation Example
+
+A simple automation to bring all this home. This uses the above example for a short and long version of volume up:
 
 ```yaml
 - alias: unversal_remote_volume_up_slow
@@ -116,21 +136,3 @@ A simple automation using the above example for a short and long version of volu
   action:
     # fast volume up
 ```
-
-### Keyboard Remote integration setup
-
-Its important you have the `Keyboard Remote` configuration in Home Assistant setup correctly for this app to work properly. Namely, for long key presses to be detected `key_hold` events must be enabled.
-
-Example `/config/configuration.yaml` config:
-
-```yaml
-keyboard_remote:
-  - device_name: USB Composite Device Keyboard
-    type:
-      - key_up
-    emulate_key_hold: true
-    emulate_key_hold_delay: 0.5
-    emulate_key_hold_repeat: 0.2
-```
-
-> Note: I recommend not using the type `key_hold` even if your USB device sends them. Using the emulated hold gives you control over the hold timings, which you dont get if you use the native type. In the example config above I am saying I dont want a key press to be a long press till its held for 0.5 seconds, then repeat 5 times a seconds.
