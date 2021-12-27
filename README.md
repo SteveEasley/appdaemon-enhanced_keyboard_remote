@@ -85,7 +85,6 @@ enhanced_keyboard_remote:
     - keys:
         116:
           name: power
-          repeat: single
         115:
           name: volume_up
           repeat: true
