@@ -11,7 +11,7 @@ A great use case for this app is utilizating a USB RF remote control as a univer
 
 - [Home Assistant](https://www.home-assistant.io/)
 - [AppDaemon](https://community.home-assistant.io/t/home-assistant-community-add-on-appdaemon-4/163259). A Home Assistant addon that runs this app.
-- [Keyboard Remote](https://www.home-assistant.io/integrations/keyboard_remote). The Home Assistant integration that this app enhances.
+- [Keyboard Remote](https://www.home-assistant.io/integrations/keyboard_remote). The Home Assistant integration that this app enhances. See the Keyboard Remote integration setup section below.
 
 ## Installation
 
@@ -69,7 +69,7 @@ Key | Optional | Type | Default | Description
 `class` | False | string | | The name of the Class (must be `EnhancedKeyboardRemote`).
 `description` | False | string | | A description for the app.
 `config` | False | array | [] | A list of one or more device configurations. Each configuration should represent one keyboard/remote. If you only have a single device, for simplicity you can omit the `device_name` / `device_descriptor` keys below.
-`config[].device_name` | True | array | [] | An optional list of device names this config must match, allowing support for multiple keyboard/remotes. The values would be the same values used in your `Keyboard Remote` configuration in `configuration.yaml`.<br><br>If omited (and `config[].device_descriptor` is omitted), the first config in `config[]` will always be chosen.
+`config[].device_name` | True | array | [] | An optional list of device names this config must match, allowing support for multiple keyboard/remotes. The values would be the same values used in your `Keyboard Remote` configuration in `configuration.yaml`.<br><br>If omitted (and `config[].device_descriptor` is omitted), the first config in `config[]` will always be chosen.
 `config[].device_descriptor` | True | array | [] | An optional list of device descriptors this config must match. Follows the same rules as `config[].device_name`.
 `config[].keys` | False | map | {} | A map of key codes to configuration.
 `config[].keys.name` | False | string | | The logical name of the key. This will show up as `key_name` in the event.
@@ -116,3 +116,21 @@ A simple automation using the above example for a short and long version of volu
   action:
     # fast volume up
 ```
+
+### Keyboard Remote integration setup
+
+Its important you have the `Keyboard Remote` configuration in Home Assistant setup correctly for this app to work properly. Namely, for long key presses to be detected `key_hold` events must be enabled.
+
+Example `/config/configuration.yaml` config:
+
+```yaml
+keyboard_remote:
+  - device_name: USB Composite Device Keyboard
+    type:
+      - key_up
+    emulate_key_hold: true
+    emulate_key_hold_delay: 0.5
+    emulate_key_hold_repeat: 0.2
+```
+
+> Note: I recommend not using the type `key_hold` even if your USB device sends them. Using the emulated hold gives you control over the hold timings, which you dont get if you use the native type. In the example config above I am saying I dont want a key press to be a long press till its held for 0.5 seconds, then repeat 5 times a seconds.
